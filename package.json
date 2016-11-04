@@ -1,0 +1,25 @@
+{
+  "name": "tranport-methods-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "build:watch": "webpack --config webpack.config.js --watch"
+  },
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "eslint": "^3.6.1",
+    "eslint-config-airbnb-base": "^8.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "joi-browser": "^9.1.0",
+    "jquery": "^3.1.1",
+    "json-loader": "^0.5.4",
+    "moment": "^2.15.2",
+    "transport-methods": "^1.0.0",
+    "webpack": "^1.13.3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
