@@ -5,7 +5,7 @@ class CostMatrix extends React.Component {
   constructor(props) {
     super(props);
 
-    const originations = range(this.props.originsNumber)
+    const originations = range(this.props.originationsNumber)
       .map((n, idx) => {
         return {
           name: `Origination #${idx}`,
@@ -222,7 +222,7 @@ class CostMatrix extends React.Component {
 }
 
 CostMatrix.propTypes = {
-  originsNumber: React.PropTypes.number,
+  originationsNumber: React.PropTypes.number,
   destinationsNumber: React.PropTypes.number,
   onUserConfirmation: React.PropTypes.func,
 };

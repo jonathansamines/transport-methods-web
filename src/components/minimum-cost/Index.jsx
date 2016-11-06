@@ -17,9 +17,9 @@ class MinimumCost extends React.Component {
     this.allowResultCreation = this.allowResultCreation.bind(this);
   }
 
-  allowMatrixCreation({ originsNumber, destinationsNumber }) {
+  allowMatrixCreation({ originationsNumber, destinationsNumber }) {
     this.setState({
-      originsNumber,
+      originationsNumber,
       destinationsNumber,
       isMatrixCreated: true,
     });
@@ -35,7 +35,7 @@ class MinimumCost extends React.Component {
     if (this.state.isMatrixCreated) {
       return (
         <CostMatrix
-          originsNumber={this.state.originsNumber}
+          originationsNumber={this.state.originationsNumber}
           destinationsNumber={this.state.destinationsNumber}
           onUserConfirmation={this.allowResultCreation} />
       );

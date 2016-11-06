@@ -5,7 +5,7 @@ class UserInput extends React.Component {
     super(props);
 
     this.state = {
-      originsNumber: 1,
+      originationsNumber: 1,
       destinationsNumber: 1,
       minValue: 1,
     };
@@ -16,7 +16,7 @@ class UserInput extends React.Component {
 
   confirmUserAcceptance() {
     this.props.onUserConfirmation({
-      originsNumber: this.state.originsNumber,
+      originationsNumber: this.state.originationsNumber,
       destinationsNumber: this.state.destinationsNumber,
     });
   }
@@ -32,15 +32,15 @@ class UserInput extends React.Component {
   render() {
     return (<form>
       <div className="form-group">
-        <label htmlFor="originsNumber">Número de Origenes</label>
+        <label htmlFor="originationsNumber">Número de Origenes</label>
         <input
           type="number"
           className="form-control"
-          id="originsNumber"
+          id="originationsNumber"
           placeholder="#"
           min={this.state.minValue}
-          value={this.state.originsNumber}
-          onChange={this.updateProperty('originsNumber')} />
+          value={this.state.originationsNumber}
+          onChange={this.updateProperty('originationsNumber')} />
       </div>
       <div className="form-group">
         <label htmlFor="destinationsNumber">Número de Destinos</label>
