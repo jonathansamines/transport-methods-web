@@ -8,14 +8,14 @@ class CostMatrix extends React.Component {
     const originations = range(this.props.originationsNumber)
       .map((n, idx) => {
         return {
-          name: `Origination #${idx}`,
+          name: `Origen #${idx}`,
           supply: 0,
         };
       });
 
     const destinations = range(this.props.destinationsNumber)
       .map((n, idx) => ({
-        name: `Destination #${idx}`,
+        name: `Destino #${idx}`,
         demand: 0,
       }));
 
@@ -44,21 +44,19 @@ class CostMatrix extends React.Component {
   }
 
   updateRoute(origination, destination, cost) {
-    const route = this.state.routes.find((r) => {
-      return origination === r.from;
-    });
+    const route = this.state.routes.find((r) => origination === r.from);
 
-    if (route !== undefined) {
-      const dest = route.to.find((d) => d.destination === destination);
-
-      if (dest !== undefined) {
-        dest.cost = cost;
-
-        return this.state.routes.slice();
-      }
+    if (route === undefined) {
+      throw new Error('Route to update was not found');
     }
 
-    throw new Error('Route to update was not found');
+    const dest = route.to.find((d) => d.destination === destination);
+
+    if (dest !== undefined) {
+      dest.cost = cost;
+    }
+
+    return this.state.routes.slice();
   }
 
   handleValueForOrigination(origination, destination) {
@@ -81,6 +79,7 @@ class CostMatrix extends React.Component {
         return (<td key={index + 1}>
           <input
             type="number"
+            className="form-control"
             value={dest.cost}
             min={0}
             onChange={this.handleValueForOrigination(route.from, dest.destination)} />
@@ -105,13 +104,16 @@ class CostMatrix extends React.Component {
 
         return (<tr key={index}>
           {[
-            <td key={0}>{route.from}</td>,
+            <td key={0}>
+              <strong>{route.from}</strong>
+            </td>,
             ...columns,
             <td key="dest">
               <input
                 type="number"
                 value={origination.supply}
                 min={0}
+                className="form-control"
                 onChange={this.handleSupplyForOrigination(origination)} />
             </td>,
           ]}
@@ -154,6 +156,7 @@ class CostMatrix extends React.Component {
         <td key={index}>
           <input
             type="number"
+            className="form-control"
             value={destination.demand}
             min={0}
             onChange={this.handleDemandForDestination(destination)} />
@@ -168,6 +171,7 @@ class CostMatrix extends React.Component {
         <td key={index}>
           <input
             type="number"
+            className="form-control"
             value={origination.supply}
             min={0}
             onChange={this.handleDemandForDestination(origination)} />
@@ -186,7 +190,7 @@ class CostMatrix extends React.Component {
   render() {
     return (
       <div>
-        <table className="table table-bordered">
+        <table className="table table-striped">
           <caption>Matriz de Costos</caption>
           <thead>
             <tr>

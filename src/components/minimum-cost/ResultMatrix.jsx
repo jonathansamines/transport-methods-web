@@ -19,11 +19,11 @@ class ResultMatrix extends React.Component {
         return (
           <td key={index + 1}>
             <span className="label label-default">
-              Cost {dest.cost}
+              Costo {dest.cost}
             </span>
 
             <span className="label label-primary">
-              Units {dest.units}
+              Unidades {dest.units}
             </span>
           </td>
         );
@@ -60,7 +60,7 @@ class ResultMatrix extends React.Component {
 
   render() {
     return (
-      <table className="table table-bordered">
+      <table className="table table-striped">
         <caption>Resultado por Costo Mínimo</caption>
         <thead>
           <tr>
@@ -74,7 +74,7 @@ class ResultMatrix extends React.Component {
         <tfoot>
           <tr>
             <td>
-              <strong>Summary (Z) = </strong>
+              <strong>Valor de (Z)</strong>
             </td>
             <td colSpan={this.state.result.distribution[0].to.length}>
               {this.state.result.summary}
