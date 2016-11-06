@@ -5,8 +5,9 @@ class UserInput extends React.Component {
     super(props);
 
     this.state = {
-      originsNumber: 0,
-      destinationsNumber: 0,
+      originsNumber: 1,
+      destinationsNumber: 1,
+      minValue: 1,
     };
 
     this.confirmUserAcceptance = this.confirmUserAcceptance.bind(this);
@@ -37,7 +38,7 @@ class UserInput extends React.Component {
           className="form-control"
           id="originsNumber"
           placeholder="#"
-          min={0}
+          min={this.state.minValue}
           value={this.state.originsNumber}
           onChange={this.updateProperty('originsNumber')} />
       </div>
@@ -48,7 +49,7 @@ class UserInput extends React.Component {
           className="form-control"
           id="destinationsNumber"
           placeholder="#"
-          min={0}
+          min={this.state.minValue}
           value={this.state.destinationsNumber}
           onChange={this.updateProperty('destinationsNumber')} />
       </div>
@@ -57,7 +58,7 @@ class UserInput extends React.Component {
         type="submit"
         className="btn btn-default"
         onClick={this.confirmUserAcceptance}>
-        Crear Matriz
+        Crear Matriz de Costos
       </button>
     </form>);
   }
