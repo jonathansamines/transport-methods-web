@@ -17,6 +17,7 @@ class NodeNetwork extends React.Component {
           return {
             name: `Nodo Numero #${n}`,
             type: 'intermediary',
+            currentReference: '',
             input: 0,
             output: 0,
             next: [],
@@ -30,7 +31,29 @@ class NodeNetwork extends React.Component {
   }
 
   confirmUserAcceptance() {
-    console.log(this.state.nodes);
+    const nodes = this.state.nodes.slice();
+
+    nodes.forEach((node) => {
+      const value = node.currentReference;
+
+      node.next = value.split(',').map((ref) => {
+        if (ref.length === 0) return null;
+
+        const [nodeRef, cost] = ref.split('=').map((p) => p.trim());
+
+        return {
+          reference: `Nodo numero #${nodeRef}`,
+          cost: +cost,
+        };
+      })
+      .filter((ref) => ref !== null);
+    });
+
+    this.setState({
+      nodes: this.state.nodes.slice(),
+    });
+
+    this.props.onUserConfirmation(nodes);
   }
 
   updateValueForNode(node, field) {
@@ -48,12 +71,8 @@ class NodeNetwork extends React.Component {
   addReferenceToNode(originalNode) {
     return (event) => {
       const value = event.target.value;
-      const [node, cost] = value.split('=').map((p) => p.trim());
 
-      originalNode.next.push({
-        reference: `Nodo numero #${node}`,
-        cost: +cost,
-      });
+      originalNode.currentReference = value;
 
       this.setState({
         nodes: this.state.nodes.slice(),
@@ -88,11 +107,11 @@ class NodeNetwork extends React.Component {
       .map((node) => {
         return (
           <div key={node.name}>
-            <h3>Nodo Numero #{node.name}</h3>
+            <h3>{node.name}</h3>
             <br />
 
             <div className="form-group">
-              <label htmlFor="inpu" className="col-sm-2">Entrada</label>
+              <label htmlFor="input" className="col-sm-2">Entrada</label>
               <div className="col-sm-10">
                 <input
                   type="number"
@@ -169,6 +188,7 @@ class NodeNetwork extends React.Component {
 
 NodeNetwork.propTypes = {
   nodes: React.PropTypes.number,
+  onUserConfirmation: React.PropTypes.func,
 };
 
 export default NodeNetwork;

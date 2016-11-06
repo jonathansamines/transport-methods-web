@@ -52,15 +52,18 @@ body {
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
   .header,
   .marketing,
   .footer {
     padding-right: 0;
     padding-left: 0;
   }
-  /* Space out the masthead */
+
   .header {
     margin-bottom: 30px;
   }
+}
+
+.label {
+  margin-right: 5px;
 }

@@ -13,16 +13,20 @@ class ResultMatrix extends React.Component {
   }
 
   getColumns(route) {
-    return route.to
+    return route
+      .to
       .map((dest, index) => {
-        const result = `cost=${dest.cost}  units=${dest.units}`;
+        return (
+          <td key={index + 1}>
+            <span className="label label-default">
+              Cost {dest.cost}
+            </span>
 
-        return (<td key={index + 1}>
-          <input
-            type="number"
-            placeholder={result}
-            readOnly="readonly" />
-        </td>);
+            <span className="label label-primary">
+              Units {dest.units}
+            </span>
+          </td>
+        );
       });
   }
 
@@ -43,12 +47,14 @@ class ResultMatrix extends React.Component {
       .map((route, index) => {
         const columns = this.getColumns(route);
 
-        return (<tr key={index}>
-          {[
-            <td key={0}>{route.from}</td>,
-            ...columns,
-          ]}
-        </tr>);
+        return (
+          <tr key={index}>
+            {[
+              <td key={0}>{route.from}</td>,
+              ...columns,
+            ]}
+          </tr>
+        );
       });
   }
 
@@ -68,7 +74,7 @@ class ResultMatrix extends React.Component {
         <tfoot>
           <tr>
             <td>
-              <strong>Summary (Z=)</strong>
+              <strong>Summary (Z) = </strong>
             </td>
             <td colSpan={this.state.result.distribution[0].to.length}>
               {this.state.result.summary}
