@@ -55,7 +55,7 @@ class UserInput extends React.Component {
 
         <button
           type="submit"
-          className="btn btn-default">
+          className="btn btn-success">
           Crear Matriz de Costos
         </button>
       </form>

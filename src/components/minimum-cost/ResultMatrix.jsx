@@ -1,13 +1,9 @@
 import React from 'react';
 import io from 'transport-methods';
-
-const resolveLabel = {
-  minimumCost: 'Costo Minimo',
-  northwestCorner: 'Esquina Noroeste',
-};
+import transportLabels from './../enums/transport-methods';
 
 function labelResolveBy(resolveBy) {
-  return resolveLabel[resolveBy];
+  return transportLabels[resolveBy];
 }
 
 class ResultMatrix extends React.Component {
@@ -16,9 +12,6 @@ class ResultMatrix extends React.Component {
 
     const transportMatrix = io.transportMatrix(props.transportMatrix);
     const resolution = transportMatrix.resolveBy(props.resolveBy);
-
-    console.log('Matrix to resolve : ', props.transportMatrix);
-    console.log('Matrix resolved by method (%s) : ', props.resolveBy, resolution);
 
     this.state = {
       resolution,

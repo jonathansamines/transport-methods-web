@@ -42,7 +42,7 @@ class UserInput extends React.Component {
 
         <button
           type="submit"
-          className="btn btn-default">
+          className="btn btn-success">
           Crear Modelo
         </button>
       </form>

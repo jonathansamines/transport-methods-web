@@ -1,7 +1,16 @@
 import React from 'react';
 import cloneDeep from 'lodash.clonedeep';
 import Node from './Node';
+import transportLabels from './../enums/transport-methods';
 import range from './../utils/array-range';
+
+function getTransportLabels() {
+  return Object
+    .keys(transportLabels)
+    .map((key) => (
+      <option value={key}>{transportLabels[key]}</option>
+    ));
+}
 
 function computeNodeReferences(node) {
   const value = node.currentReference;
@@ -40,6 +49,7 @@ class NodeNetwork extends React.Component {
     };
 
     this.updateNode = this.updateNode.bind(this);
+    this.updateResolutionMode = this.updateResolutionMode.bind(this);
     this.confirmUserAcceptance = this.confirmUserAcceptance.bind(this);
   }
 
@@ -55,7 +65,10 @@ class NodeNetwork extends React.Component {
       nodes: this.state.nodes.slice(),
     });
 
-    this.props.onUserConfirmation(nodes);
+    this.props.onUserConfirmation({
+      nodes,
+      resolutionMode: this.state.resolutionMode,
+    });
   }
 
   updateNode(node) {
@@ -77,11 +90,36 @@ class NodeNetwork extends React.Component {
       });
   }
 
+  updateResolutionMode(event) {
+    const mode = event.target.value;
+
+    this.setState({
+      resolutionMode: mode,
+    });
+  }
+
   render() {
     return (
       <form className="form-horizontal" onSubmit={this.confirmUserAcceptance}>
         <div className="row">
           {this.renderNodes()}
+        </div>
+
+        <div className="row">
+          <hr />
+          <hr />
+          <div className="form-group">
+            <label className="col-sm-2" htmlFor="resolutionMode">Resolver por</label>
+
+            <div className="col-sm-10">
+              <select
+                id="resolutionMode"
+                className="form-control"
+                onChange={this.updateResolutionMode}>
+                {getTransportLabels()}
+              </select>
+            </div>
+          </div>
         </div>
 
         <div className="row">

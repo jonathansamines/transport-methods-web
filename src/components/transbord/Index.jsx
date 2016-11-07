@@ -3,6 +3,7 @@ import io from 'transport-methods';
 import UserInput from './UserInput';
 import NodeNetwork from './NodeNetwork';
 import ResultMatrix from './../minimum-cost/ResultMatrix';
+import transportMethods from './../enums/transport-methods';
 
 class Transbord extends React.Component {
   constructor(props) {
@@ -11,11 +12,13 @@ class Transbord extends React.Component {
     this.state = {
       userHasConfirmed: false,
       userHasComputed: false,
+      resolutionMode: transportMethods.minimumCost,
     };
 
     this.confirmNodes = this.confirmNodes.bind(this);
     this.confirmGraph = this.confirmGraph.bind(this);
   }
+
   confirmNodes(result) {
     this.setState({
       userHasConfirmed: true,
@@ -23,16 +26,18 @@ class Transbord extends React.Component {
     });
   }
 
-  confirmGraph(graph) {
+  confirmGraph({ nodes, resolutionMode }) {
     const transportOptions = io.transbordModel({
-      nodes: graph,
+      nodes,
     });
 
     this.setState({
       transportOptions,
+      resolutionMode,
       userHasComputed: true,
     });
   }
+
   render() {
     return (
       <div>
@@ -50,7 +55,7 @@ class Transbord extends React.Component {
         {
           this.state.userHasComputed &&
           <ResultMatrix
-            resolveBy="northwestCorner"
+            resolveBy={this.state.resolutionMode}
             transportMatrix={this.state.transportOptions} />
         }
       </div>
