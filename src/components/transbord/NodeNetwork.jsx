@@ -1,11 +1,11 @@
 import React from 'react';
 import range from './../utils/array-range';
 
-const nodeTypes = [
-  'intermediary',
-  'origin',
-  'destination',
-];
+const nodeTypes = {
+  intermediary: 'Intermedio',
+  origin: 'Origen Puro',
+  destination: 'Destino Puro',
+};
 
 class NodeNetwork extends React.Component {
   constructor(props) {
@@ -93,10 +93,11 @@ class NodeNetwork extends React.Component {
   }
 
   static getNodeTypes() {
-    return nodeTypes
+    return Object
+      .keys(nodeTypes)
       .map((type) => {
         return (
-          <option key={type} value={type}>{type.toUpperCase()}</option>
+          <option key={type} value={type}>{nodeTypes[type]}</option>
         );
       });
   }
@@ -106,44 +107,44 @@ class NodeNetwork extends React.Component {
       .nodes
       .map((node) => {
         return (
-          <div key={node.name}>
+          <div key={node.name} className="col-sm-4">
             <h3>{node.name}</h3>
             <br />
 
             <div className="form-group">
-              <label htmlFor="input" className="col-sm-2">Entrada</label>
-              <div className="col-sm-10">
+              <label htmlFor="input" className="col-sm-4">Entrada</label>
+              <div className="col-sm-8">
                 <input
                   type="number"
                   className="form-control"
                   id="input"
-                  placeholder="#"
                   min={0}
                   value={node.input}
+                  readOnly={node.type === 'destination' ? 'readonly' : ''}
                   onChange={this.updateValueForNode(node, 'input')} />
               </div>
             </div>
 
             <div className="form-group">
-              <label htmlFor="output" className="col-sm-2">Salida</label>
-              <div className="col-sm-10">
+              <label htmlFor="output" className="col-sm-4">Salida</label>
+              <div className="col-sm-8">
                 <input
                   type="number"
                   className="form-control"
                   id="output"
-                  placeholder="#"
                   min={0}
                   value={node.output}
+                  readOnly={node.type === 'origin' ? 'readonly' : ''}
                   onChange={this.updateValueForNode(node, 'output')} />
               </div>
             </div>
 
             <div className="form-group">
-              <label htmlFor="type" className="col-sm-2">Tipo</label>
-              <div className="col-sm-10">
+              <label htmlFor="type" className="col-sm-4">Tipo</label>
+              <div className="col-sm-8">
                 <select
-                  className="form-control"
                   id="type"
+                  className="form-control"
                   onChange={this.updateNodeType(node)} >
                   {NodeNetwork.getNodeTypes()}
                 </select>
@@ -151,8 +152,8 @@ class NodeNetwork extends React.Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="type" className="col-sm-2">Transbordos</label>
-              <div className="col-sm-10">
+              <label htmlFor="type" className="col-sm-4">Transbordos</label>
+              <div className="col-sm-8">
                 <input
                   type="text"
                   className="form-control"
@@ -170,17 +171,21 @@ class NodeNetwork extends React.Component {
   render() {
     return (
       <form className="form-horizontal">
-        {this.getNodes()}
+        <div className="row">
+          {this.getNodes()}
+        </div>
 
-        <hr />
-        <hr />
+        <div className="row">
+          <hr />
+          <hr />
 
-        <button
-          type="submit"
-          className="btn btn-default"
-          onClick={this.confirmUserAcceptance}>
-          Resolver
-        </button>
+          <button
+            type="submit"
+            className="btn btn-default"
+            onClick={this.confirmUserAcceptance}>
+            Resolver
+          </button>
+        </div>
       </form>
     );
   }

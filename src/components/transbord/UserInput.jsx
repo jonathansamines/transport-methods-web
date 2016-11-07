@@ -5,7 +5,7 @@ class UserInput extends React.Component {
     super(props);
 
     this.state = {
-      nodeNumber: 0,
+      nodeNumber: 1,
     };
 
     this.confirmUserAcceptance = this.confirmUserAcceptance.bind(this);
@@ -27,26 +27,27 @@ class UserInput extends React.Component {
   }
 
   render() {
-    return (<form>
-      <div className="form-group">
-        <label htmlFor="nodeNumber">Número de Nodos</label>
-        <input
-          type="number"
-          className="form-control"
-          id="nodeNumber"
-          placeholder="#"
-          min={0}
-          value={this.state.nodeNumber}
-          onChange={this.updateProperty('nodeNumber')} />
-      </div>
+    return (
+      <form>
+        <div className="form-group">
+          <label htmlFor="nodeNumber">Número de Nodos</label>
+          <input
+            type="number"
+            className="form-control"
+            id="nodeNumber"
+            min={1}
+            value={this.state.nodeNumber}
+            onChange={this.updateProperty('nodeNumber')} />
+        </div>
 
-      <button
-        type="submit"
-        className="btn btn-default"
-        onClick={this.confirmUserAcceptance}>
-        Crear Modelo
-      </button>
-    </form>);
+        <button
+          type="submit"
+          className="btn btn-default"
+          onClick={this.confirmUserAcceptance}>
+          Crear Modelo
+        </button>
+      </form>
+    );
   }
 }
 
