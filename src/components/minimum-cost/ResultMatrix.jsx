@@ -1,12 +1,24 @@
 import React from 'react';
 import io from 'transport-methods';
 
+const resolveLabel = {
+  minimumCost: 'Costo Minimo',
+  northwestCorner: 'Esquina Noroeste',
+};
+
+function labelResolveBy(resolveBy) {
+  return resolveLabel[resolveBy];
+}
+
 class ResultMatrix extends React.Component {
   constructor(props) {
     super(props);
 
     const transportMatrix = io.transportMatrix(props.transportMatrix);
     const resolution = transportMatrix.resolveBy(props.resolveBy);
+
+    console.log('Matrix to resolve : ', props.transportMatrix);
+    console.log('Matrix resolved by method (%s) : ', props.resolveBy, resolution);
 
     this.state = {
       resolution,
@@ -81,9 +93,9 @@ class ResultMatrix extends React.Component {
       .map((origination) => {
         const elements = origination.to
           .filter((d) => d.units !== 0)
-          .map((dest) => {
+          .map((dest, idx) => {
             return (
-              <i className="label label-default">{dest.cost} * {dest.units}</i>
+              <i key={idx} className="label label-default">{dest.cost} * {dest.units}</i>
             );
           });
 
@@ -111,7 +123,7 @@ class ResultMatrix extends React.Component {
   render() {
     return (
       <table className="table table-striped">
-        <caption>Resultado por Costo Mínimo</caption>
+        <caption>Resultado por {labelResolveBy(this.props.resolveBy)}</caption>
 
         {this.renderHeader()}
         {this.renderGrid()}

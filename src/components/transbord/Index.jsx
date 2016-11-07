@@ -42,12 +42,16 @@ class Transbord extends React.Component {
 
         {
           this.state.userHasConfirmed &&
-          <NodeNetwork nodes={this.state.nodeNumber} onUserConfirmation={this.confirmGraph} />
+          <NodeNetwork
+            nodes={this.state.nodeNumber}
+            onUserConfirmation={this.confirmGraph} />
         }
 
         {
           this.state.userHasComputed &&
-          <ResultMatrix transportMatrix={this.state.transportOptions} />
+          <ResultMatrix
+            resolveBy="northwestCorner"
+            transportMatrix={this.state.transportOptions} />
         }
       </div>
     );
