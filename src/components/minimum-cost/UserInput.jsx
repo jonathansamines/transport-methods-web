@@ -21,46 +21,46 @@ class UserInput extends React.Component {
     });
   }
 
-  updateProperty(property) {
+  updateProperty(propertyName) {
     return (event) => {
       return this.setState({
-        [property]: +event.target.value,
+        [propertyName]: +event.target.value,
       });
     };
   }
 
   render() {
-    return (<form>
-      <div className="form-group">
-        <label htmlFor="originationsNumber">Número de Origenes</label>
-        <input
-          type="number"
-          className="form-control"
-          id="originationsNumber"
-          placeholder="#"
-          min={this.state.minValue}
-          value={this.state.originationsNumber}
-          onChange={this.updateProperty('originationsNumber')} />
-      </div>
-      <div className="form-group">
-        <label htmlFor="destinationsNumber">Número de Destinos</label>
-        <input
-          type="number"
-          className="form-control"
-          id="destinationsNumber"
-          placeholder="#"
-          min={this.state.minValue}
-          value={this.state.destinationsNumber}
-          onChange={this.updateProperty('destinationsNumber')} />
-      </div>
+    return (
+      <form>
+        <div className="form-group">
+          <label htmlFor="originationsNumber">Número de Origenes</label>
+          <input
+            type="number"
+            className="form-control"
+            id="originationsNumber"
+            min={this.state.minValue}
+            value={this.state.originationsNumber}
+            onChange={this.updateProperty('originationsNumber')} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="destinationsNumber">Número de Destinos</label>
+          <input
+            type="number"
+            className="form-control"
+            id="destinationsNumber"
+            min={this.state.minValue}
+            value={this.state.destinationsNumber}
+            onChange={this.updateProperty('destinationsNumber')} />
+        </div>
 
-      <button
-        type="submit"
-        className="btn btn-default"
-        onClick={this.confirmUserAcceptance}>
-        Crear Matriz de Costos
-      </button>
-    </form>);
+        <button
+          type="submit"
+          className="btn btn-default"
+          onClick={this.confirmUserAcceptance}>
+          Crear Matriz de Costos
+        </button>
+      </form>
+    );
   }
 }
 

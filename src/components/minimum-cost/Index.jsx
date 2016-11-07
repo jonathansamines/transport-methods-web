@@ -49,8 +49,9 @@ class MinimumCost extends React.Component {
       return (
         <div>
           <hr />
-
-          <ResultMatrix transportMatrix={this.state.transportMatrix} />
+          <ResultMatrix
+            resolveBy="minimumCost"
+            transportMatrix={this.state.transportMatrix} />
         </div>
       );
     }

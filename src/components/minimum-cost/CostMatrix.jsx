@@ -5,19 +5,15 @@ class CostMatrix extends React.Component {
   constructor(props) {
     super(props);
 
-    const originations = range(this.props.originationsNumber)
-      .map((n, idx) => {
-        return {
-          name: `Origen #${idx}`,
-          supply: 0,
-        };
-      });
+    const originations = range(this.props.originationsNumber).map((n, idx) => ({
+      name: `Origen #${idx}`,
+      supply: 0,
+    }));
 
-    const destinations = range(this.props.destinationsNumber)
-      .map((n, idx) => ({
-        name: `Destino #${idx}`,
-        demand: 0,
-      }));
+    const destinations = range(this.props.destinationsNumber).map((n, idx) => ({
+      name: `Destino #${idx}`,
+      demand: 0,
+    }));
 
     const routes = originations.map((from) => {
       const to = destinations.map((destination) => ({
@@ -76,14 +72,16 @@ class CostMatrix extends React.Component {
   getColumns(route) {
     return route.to
       .map((dest, index) => {
-        return (<td key={index + 1}>
-          <input
-            type="number"
-            className="form-control"
-            value={dest.cost}
-            min={0}
-            onChange={this.handleValueForOrigination(route.from, dest.destination)} />
-        </td>);
+        return (
+          <td key={index + 1}>
+            <input
+              type="number"
+              className="form-control"
+              value={dest.cost}
+              min={0}
+              onChange={this.handleValueForOrigination(route.from, dest.destination)} />
+          </td>
+        );
       });
   }
 
@@ -101,23 +99,28 @@ class CostMatrix extends React.Component {
       .map((route, index) => {
         const origination = this.state.originations.find((d) => d.name === route.from);
         const columns = this.getColumns(route);
+        const originationCol = (
+          <td key={0}>
+            <strong>{route.from}</strong>
+          </td>
+        );
 
-        return (<tr key={index}>
-          {[
-            <td key={0}>
-              <strong>{route.from}</strong>
-            </td>,
-            ...columns,
-            <td key="dest">
-              <input
-                type="number"
-                value={origination.supply}
-                min={0}
-                className="form-control"
-                onChange={this.handleSupplyForOrigination(origination)} />
-            </td>,
-          ]}
-        </tr>);
+        const originationSupplyCol = (
+          <td key="dest">
+            <input
+              type="number"
+              value={origination.supply}
+              min={0}
+              className="form-control"
+              onChange={this.handleSupplyForOrigination(origination)} />
+          </td>
+        );
+
+        return (
+          <tr key={index}>
+            {[originationCol, ...columns, originationSupplyCol]}
+          </tr>
+        );
       });
   }
 
@@ -189,7 +192,7 @@ class CostMatrix extends React.Component {
 
   render() {
     return (
-      <div>
+      <form>
         <table className="table table-striped">
           <caption>Matriz de Costos</caption>
           <thead>
@@ -220,7 +223,7 @@ class CostMatrix extends React.Component {
           onClick={this.confirmUserAcceptance} >
           Calcular Resultado
         </button>
-      </div>
+      </form>
     );
   }
 }
