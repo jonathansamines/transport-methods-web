@@ -67,3 +67,17 @@ body {
 .label {
   margin-right: 5px;
 }
+
+.logo, .logo-title {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.logo {
+  background-image: url('umg-logo.png');
+  background-repeat: no-repeat;
+  background-size: 60px;
+  width: 60px;
+  height: 60px;
+}
