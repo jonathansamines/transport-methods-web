@@ -192,7 +192,7 @@ class CostMatrix extends React.Component {
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.confirmUserAcceptance}>
         <table className="table table-striped">
           <caption>Matriz de Costos</caption>
           <thead>
@@ -219,8 +219,7 @@ class CostMatrix extends React.Component {
 
         <button
           type="submit"
-          className="btn btn-default"
-          onClick={this.confirmUserAcceptance} >
+          className="btn btn-default">
           Calcular Resultado
         </button>
       </form>

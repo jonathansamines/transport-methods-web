@@ -31,8 +31,8 @@ class Node extends React.Component {
 
   render() {
     const node = this.props.node;
-    const inputReadOnly = node.type === 'destination' ? 'readonly' : '';
-    const outputReadOnly = node.type === 'origin' ? 'readonly' : '';
+    const destinationReadOnly = node.type === 'destination' ? 'readonly' : '';
+    const originationReadOnly = node.type === 'origin' ? 'readonly' : '';
 
     return (
       <div className="col-sm-4">
@@ -48,7 +48,7 @@ class Node extends React.Component {
               className="form-control"
               min={0}
               value={node.input}
-              readOnly={inputReadOnly}
+              readOnly={destinationReadOnly}
               onChange={this.updateValue('input')} />
           </div>
         </div>
@@ -62,7 +62,7 @@ class Node extends React.Component {
               className="form-control"
               min={0}
               value={node.output}
-              readOnly={outputReadOnly}
+              readOnly={originationReadOnly}
               onChange={this.updateValue('output')} />
           </div>
         </div>
@@ -87,6 +87,7 @@ class Node extends React.Component {
               type="text"
               className="form-control"
               placeholder="Comma separated list"
+              readOnly={destinationReadOnly}
               onChange={this.updateValue('currentReference')} />
           </div>
         </div>

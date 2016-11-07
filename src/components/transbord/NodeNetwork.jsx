@@ -79,7 +79,7 @@ class NodeNetwork extends React.Component {
 
   render() {
     return (
-      <form className="form-horizontal">
+      <form className="form-horizontal" onSubmit={this.confirmUserAcceptance}>
         <div className="row">
           {this.renderNodes()}
         </div>
@@ -90,8 +90,7 @@ class NodeNetwork extends React.Component {
 
           <button
             type="submit"
-            className="btn btn-default"
-            onClick={this.confirmUserAcceptance}>
+            className="btn btn-default">
             Resolver
           </button>
 

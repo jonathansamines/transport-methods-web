@@ -31,7 +31,7 @@ class UserInput extends React.Component {
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.confirmUserAcceptance}>
         <div className="form-group">
           <label htmlFor="originationsNumber">Número de Origenes</label>
           <input
@@ -55,8 +55,7 @@ class UserInput extends React.Component {
 
         <button
           type="submit"
-          className="btn btn-default"
-          onClick={this.confirmUserAcceptance}>
+          className="btn btn-default">
           Crear Matriz de Costos
         </button>
       </form>
