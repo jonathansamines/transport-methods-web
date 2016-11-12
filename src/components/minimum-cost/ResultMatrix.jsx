@@ -13,6 +13,9 @@ class ResultMatrix extends React.Component {
     const transportMatrix = io.transportMatrix(props.transportMatrix);
     const resolution = transportMatrix.resolveBy(props.resolveBy);
 
+    console.log('Using transport matrix options: ', transportMatrix);
+    console.log('Resolved by (%s) with ', props.resolveBy, resolution);
+
     this.state = {
       resolution,
       originations: props.transportMatrix.originations,
